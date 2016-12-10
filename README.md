@@ -100,7 +100,7 @@ An expected output record for sample input will be like this:
 
 <u>Sample Input (apache access log)</u>
 ```
-125.212.152.166 - - [17/Jan/2016:05:03:25 +0000] "GET /foo/bar/test.html HTTP/1.1" 304 179 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
+124.211.152.156 - - [10/Dec/2016:05:28:52 +0000] "GET /test/foo.html HTTP/1.1" 200 323 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
 ```
 
 <u>Output Record</u>
@@ -130,7 +130,7 @@ $ rake install:local
 $ fluentd -c fluent.conf -vv &
 
 # send test apache requests for testing plugin ( only in the case that input source is apache access log )
-$ ab -n 5 -c 2 http://localhost/foo/bar/test.html
+$ ab -n 5 -c 2 http://localhost/test/foo.html
 ```
 
 ## Change log

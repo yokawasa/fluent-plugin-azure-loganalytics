@@ -23,7 +23,7 @@ unless ENV.has_key?('VERBOSE')
   $log = nulllogger
 end
 
-require 'fluent/plugin/out_azure_loganalytics'
+require 'fluent/plugin/out_azure-loganalytics'
 
 class Test::Unit::TestCase
 end
