@@ -105,6 +105,8 @@ An expected output record for sample input will be like this:
 
 <u>Output Record</u>
 
+The output record for sample input can be seen at Log Analytics portal like this:
+
 ![fluent-plugin-azure-loganalytics output image](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/raw/master/img/Azure-LogAnalytics-Output-Image.png)
 
 
