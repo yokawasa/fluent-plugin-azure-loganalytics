@@ -138,6 +138,7 @@ $ ab -n 5 -c 2 http://localhost/test/foo.html
 
 ## Links
 
+* http://yokawasa.github.io/fluent-plugin-azure-loganalytics
 * https://rubygems.org/gems/fluent-plugin-azure-loganalytics
 * https://rubygems.org/gems/azure-loganalytics-datacollector-api
 
