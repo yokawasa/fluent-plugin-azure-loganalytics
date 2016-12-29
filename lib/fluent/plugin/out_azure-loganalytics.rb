@@ -15,7 +15,7 @@ module Fluent
                  :desc => "Your Operations Management Suite workspace ID"
     config_param :shared_key, :string, :secret => true,
                  :desc => "The primary or the secondary Connected Sources client authentication key"
-    config_param :log_type, :string, default: nil,
+    config_param :log_type, :string,
                  :desc => "The name of the event type that is being submitted to Log Analytics"
     config_param :add_time_field, :bool, :default => true,
                  :desc => "This option allows to insert a time field to record"
