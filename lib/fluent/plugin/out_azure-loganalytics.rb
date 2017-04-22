@@ -17,6 +17,8 @@ module Fluent
                  :desc => "The primary or the secondary Connected Sources client authentication key"
     config_param :log_type, :string,
                  :desc => "The name of the event type that is being submitted to Log Analytics"
+    config_param :time_generated_field, :string, :default => '',
+                 :desc => "The name of the time generated field. Be carefule that the value of field should strictly follow the ISO 8601 format (YYYY-MM-DDThh:mm:ssZ)"
     config_param :add_time_field, :bool, :default => true,
                  :desc => "This option allows to insert a time field to record"
     config_param :time_field_name, :string, :default => "time",
@@ -71,7 +73,7 @@ module Fluent
         records.push(record)
       }
       begin
-        res = @client.post_data(@log_type, records)
+        res = @client.post_data(@log_type, records, @time_generated_field)
         if not Azure::Loganalytics::Datacollectorapi::Client.is_success(res)
           $log.fatal "DataCollector API request failure: error code: " 
                   + "#{res.code}, data=>" + records.to_json

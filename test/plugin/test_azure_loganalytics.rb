@@ -9,6 +9,7 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
     customer_id <Customer ID aka WorkspaceID String>
     shared_key <Primary Key String>
     log_type ApacheAccessLog
+    time_generated_field eventtime
     add_time_field true
     localtime true
     add_tag_field true
@@ -57,7 +58,8 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
         :status => "304",
         :size => "-",
         :referer => "-",
-        :agent => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:27.0) Gecko/20100101 Firefox/27.0"
+        :agent => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:27.0) Gecko/20100101 Firefox/27.0",
+        :eventtime => "2016-12-10T09:44:32Z"
       }, time)
 
     d.emit(
@@ -71,7 +73,8 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
         :status =>"200",
         :size => "-",
         :referer => "-",
-        :agent => "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0"
+        :agent => "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0",
+        :eventtime => "2016-12-10T09:45:14Z"
       }, time)
 
     data = d.run

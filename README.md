@@ -38,6 +38,7 @@ Once you have the workspace, get Workspace ID and Shared Key (either Primary Key
  * **customer\_id (required)** - Your Operations Management Suite workspace ID
  * **shared\_key (required)** - The primary or the secondary Connected Sources client authentication key
  * **log\_type (required)** - The name of the event type that is being submitted to Log Analytics
+ * **time\_generated\_field (optional)** - Default:''(empty string) The name of the time generated field. Be carefule that the value of field should strictly follow the ISO 8601 format (YYYY-MM-DDThh:mm:ssZ). See also [this](https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-collector-api#create-a-request) for more details
  * **add\_time\_field (optional)** - Default:true. This option allows to insert a time field to record
  * **time\_field\_name (optional)** - Default:time. This is required only when add_time_field is true
  * **localtime (optional)** - Default:false. Time record is inserted with UTC (Coordinated Universal Time) by default. This option allows to use local time if you set localtime true. This is valid only when add_time_field is true
