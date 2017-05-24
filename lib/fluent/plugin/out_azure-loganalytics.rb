@@ -12,10 +12,6 @@ module Fluent::Plugin
 
     DEFAULT_BUFFER_TYPE = "memory"
 
-    def initialize
-      super
-    end
-
     config_param :customer_id, :string,
                  :desc => "Your Operations Management Suite workspace ID"
     config_param :shared_key, :string, :secret => true,
