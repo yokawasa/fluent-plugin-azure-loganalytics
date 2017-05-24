@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+require 'msgpack'
+require 'time'
+require "azure/loganalytics/datacollectorapi/client"
 require 'fluent/plugin/output'
 
 module Fluent::Plugin
@@ -12,9 +14,6 @@ module Fluent::Plugin
 
     def initialize
       super
-      require 'msgpack'
-      require 'time'
-      require "azure/loganalytics/datacollectorapi/client"
     end
 
     config_param :customer_id, :string,
