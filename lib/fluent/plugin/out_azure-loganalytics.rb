@@ -90,11 +90,11 @@ module Fluent::Plugin
       begin
         res = @client.post_data(@log_type, records, @time_generated_field)
         if not Azure::Loganalytics::Datacollectorapi::Client.is_success(res)
-          $log.fatal "DataCollector API request failure: error code: "
+          log.fatal "DataCollector API request failure: error code: "
                   + "#{res.code}, data=>" + records.to_json
         end
       rescue Exception => ex
-        $log.fatal "Exception occured in posting to DataCollector API: "
+        log.fatal "Exception occured in posting to DataCollector API: "
                   + "'#{ex}', data=>" + records.to_json
       end
     end
