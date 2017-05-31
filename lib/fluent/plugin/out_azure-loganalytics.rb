@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
+require 'msgpack'
+require 'time'
+require "azure/loganalytics/datacollectorapi/client"
+require 'fluent/plugin/output'
 
-module Fluent
-  class AzureLogAnalyticsOutput < BufferedOutput
-    Plugin.register_output('azure-loganalytics', self)
+module Fluent::Plugin
+  class AzureLogAnalyticsOutput < Output
+    Fluent::Plugin.register_output('azure-loganalytics', self)
 
-    def initialize
-      super
-      require 'msgpack'
-      require 'time'
-      require "azure/loganalytics/datacollectorapi/client"
-    end
+    helpers :compat_parameters
+
+    DEFAULT_BUFFER_TYPE = "memory"
 
     config_param :customer_id, :string,
                  :desc => "Your Operations Management Suite workspace ID"
@@ -32,18 +33,24 @@ module Fluent
     config_param :tag_field_name, :string, :default => "tag",
                  :desc => "This is required only when add_time_field is true"
 
+    config_section :buffer do
+      config_set_default :@type, DEFAULT_BUFFER_TYPE
+      config_set_default :chunk_keys, ['tag']
+    end
+
     def configure(conf)
+      compat_parameters_convert(conf, :buffer)
       super
-      raise ConfigError, 'no customer_id' if @customer_id.empty?
-      raise ConfigError, 'no shared_key' if @shared_key.empty?
-      raise ConfigError, 'no log_type' if @log_type.empty?
+      raise Fluent::ConfigError, 'no customer_id' if @customer_id.empty?
+      raise Fluent::ConfigError, 'no shared_key' if @shared_key.empty?
+      raise Fluent::ConfigError, 'no log_type' if @log_type.empty?
       if @add_time_field and @time_field_name.empty?
-        raise ConfigError, 'time_field_name must be set if add_time_field is true'
+        raise Fluent::ConfigError, 'time_field_name must be set if add_time_field is true'
       end
       if @add_tag_field and @tag_field_name.empty?
-        raise ConfigError, 'tag_field_name must be set if add_tag_field is true'
+        raise Fluent::ConfigError, 'tag_field_name must be set if add_tag_field is true'
       end
-      @timef = TimeFormatter.new(@time_format, @localtime)
+      @timef = Fluent::TimeFormatter.new(@time_format, @localtime)
     end
 
     def start
@@ -67,6 +74,14 @@ module Fluent
       record.to_msgpack
     end
 
+    def formatted_to_msgpack_binary?
+      true
+    end
+
+    def multi_workers_ready?
+      true
+    end
+
     def write(chunk)
       records = []
       chunk.msgpack_each { |record|
@@ -75,11 +90,11 @@ module Fluent
       begin
         res = @client.post_data(@log_type, records, @time_generated_field)
         if not Azure::Loganalytics::Datacollectorapi::Client.is_success(res)
-          $log.fatal "DataCollector API request failure: error code: " 
+          log.fatal "DataCollector API request failure: error code: "
                   + "#{res.code}, data=>" + records.to_json
         end
       rescue Exception => ex
-        $log.fatal "Exception occured in posting to DataCollector API: " 
+        log.fatal "Exception occured in posting to DataCollector API: "
                   + "'#{ex}', data=>" + records.to_json
       end
     end
