@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version       = File.read("VERSION").strip
   gem.authors       = ["Yoichi Kawasaki"]
   gem.email         = ["yoichi.kawasaki@outlook.com"]
-  gem.summary       = %q{Azure Functions output plugin for Fluentd}
+  gem.summary       = %q{Azure Log Analytics output plugin for Fluentd}
   gem.description   = gem.summary
   gem.homepage      = "http://github.com/yokawasa/fluent-plugin-azure-loganalytics"
   gem.license       = "Apache-2.0"
