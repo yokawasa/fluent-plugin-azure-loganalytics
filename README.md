@@ -3,6 +3,13 @@
 
 ![fluent-plugin-azure-loganalytics overview](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/raw/master/img/Azure-LogAnalytics-Fluentd.png)
 
+## Requirements
+
+| fluent-plugin-azure-loganalytics | fluentd | ruby |
+|------------------------|---------|------|
+| >= 0.3.0 | >= v0.14.15 | >= 2.1 |
+|  < 0.3.0 | >= v0.12.0 | >= 1.9 |
+
 ## Installation
 ```
 $ gem install fluent-plugin-azure-loganalytics
