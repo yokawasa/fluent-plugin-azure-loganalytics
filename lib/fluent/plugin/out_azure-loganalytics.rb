@@ -17,7 +17,7 @@ module Fluent::Plugin
     config_param :shared_key, :string, :secret => true,
                  :desc => "The primary or the secondary Connected Sources client authentication key"
     config_param :log_type, :string,
-                 :desc => "The name of the event type that is being submitted to Log Analytics"
+                 :desc => "The name of the event type that is being submitted to Log Analytics. log_type only alpha characters"
     config_param :time_generated_field, :string, :default => '',
                  :desc => "The name of the time generated field. Be carefule that the value of field should strictly follow the ISO 8601 format (YYYY-MM-DDThh:mm:ssZ)"
     config_param :add_time_field, :bool, :default => true,
@@ -44,6 +44,9 @@ module Fluent::Plugin
       raise Fluent::ConfigError, 'no customer_id' if @customer_id.empty?
       raise Fluent::ConfigError, 'no shared_key' if @shared_key.empty?
       raise Fluent::ConfigError, 'no log_type' if @log_type.empty?
+      if not @log_type.match(/^[[:alpha:]]+$/)
+        raise Fluent::ConfigError, 'log_type supports only alpha characters'
+      end
       if @add_time_field and @time_field_name.empty?
         raise Fluent::ConfigError, 'time_field_name must be set if add_time_field is true'
       end
