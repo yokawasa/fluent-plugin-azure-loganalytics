@@ -31,8 +31,8 @@ $ suod yum group install "Development Tools"
 
 ## 1. Install td-agent (fluentd)
 
-Following the fluentd official page, install like this:
-https://docs.fluentd.org/v0.12/articles/install-by-rpm
+Following the [fluentd official page](https://docs.fluentd.org/v0.12/articles/install-by-rpm), install like this:
+
 ```
 $ curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent2.sh | sh
 
