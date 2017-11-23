@@ -22,12 +22,10 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
 
   def test_configure
     d = create_driver
-    assert_equal '<Customer ID aka WorkspaceID String>', d.instance.customer_id
-    assert_equal '<Primary Key String>', d.instance.shared_key
     assert_equal 'ApacheAccessLog', d.instance.log_type
-    assert_true d.instance.add_time_field
-    assert_true d.instance.localtime
-    assert_true d.instance.add_tag_field
+    assert_equal true, d.instance.add_time_field
+    assert_equal true, d.instance.localtime
+    assert_equal true, d.instance.add_tag_field
     assert_equal 'tag', d.instance.tag_field_name
   end
 

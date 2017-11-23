@@ -11,9 +11,19 @@
 |  < 0.3.0 | >= v0.12.0 | >= 1.9 |
 
 ## Installation
+### Installing gems into system Ruby
 ```
 $ gem install fluent-plugin-azure-loganalytics
 ```
+
+### Installing gems into td-agent’s Ruby
+If you installed td-agent and want to add this custom plugins, use td-agent-gem to install as td-agent has own Ruby so you should install gems into td-agent’s Ruby, not system Ruby:
+
+```
+$ /usr/sbin/td-agent-gem install fluent-plugin-azure-loganalytics
+```
+Please see also [I installed td-agent and want to add custom plugins. How do I do it?](https://docs.fluentd.org/v0.12/articles/faq#i-installed-td-agent-and-want-to-add-custom-plugins.-how-do-i-do-it?)
+
 
 ## Configuration
 
@@ -119,7 +129,7 @@ The output record for sample input can be seen at Log Analytics portal like this
 
 
 ## Tests
-### Running test code
+### Running test code (using System rake)
 ```
 $ git clone https://github.com/yokawasa/fluent-plugin-azure-loganalytics.git
 $ cd fluent-plugin-azure-loganalytics
@@ -129,6 +139,18 @@ $ vi test/plugin/test_azure_loganalytics.rb
 
 # run test
 $ rake test
+```
+
+### Running test code (using td-agent's rake)
+```
+$ git clone https://github.com/yokawasa/fluent-plugin-azure-loganalytics.git
+$ cd fluent-plugin-azure-loganalytics
+
+# edit CONFIG params of test/plugin/test_azure_loganalytics.rb
+$ vi test/plugin/test_azure_loganalytics.rb
+
+# run test 
+$ /opt/td-agent/embedded/bin/rake test
 ```
 
 ### Creating package, running and testing locally
@@ -148,9 +170,9 @@ $ ab -n 5 -c 2 http://localhost/test/foo.html
 
 ## Links
 
-* http://yokawasa.github.io/fluent-plugin-azure-loganalytics
 * https://rubygems.org/gems/fluent-plugin-azure-loganalytics
 * https://rubygems.org/gems/azure-loganalytics-datacollector-api
+* [How to install td-agent and luent-plugin-azure-loganalytics plugin on RHEL](docs/install-tdagent-and-the-plugin-on-rhel.md)
 
 ## Contributing
 
