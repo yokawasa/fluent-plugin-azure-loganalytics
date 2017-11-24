@@ -111,6 +111,41 @@ fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default
     tag_field_name mytag
 </match>
 ```
+### (3) Configuration with Typecast file
+
+You want to add typecast filter when you want to cast fields type. The filed type of code and size are cast by typecast filter.
+<u>fluent.conf</u>
+```
+<source>
+    @type tail                         # input plugin
+    path /var/log/apache2/access.log   # monitoring file
+    pos_file /tmp/fluentd_pos_file     # position file
+    format apache                      # format
+    tag azure-loganalytics.access      # tag
+</source>
+
+<filter **>
+    @type typecast
+    types host:string,user:string,method:string,path:string,referer:string,agent:string,code:integer,size:integer
+</filter>
+
+<match azure-loganalytics.**>
+    @type azure-loganalytics
+    customer_id 818f7bbc-8034-4cc3-b97d-f068dd4cd658
+    shared_key ppC5500KzCcDsOKwM1yWUvZydCuC3m+ds/2xci0byeQr1G3E0Jkygn1N0Rxx/yVBUrDE2ok3vf4ksCzvBmQXHw==(dummy)
+    log_type ApacheAccessLog
+    add_time_field true
+    time_field_name mytime
+    time_format %s
+    localtime true
+    add_tag_field true
+    tag_field_name mytag
+</match>
+```
+[note] you need to install [fluent-plugin-filter-typecast](https://github.com/sonots/fluent-plugin-filter_typecast) for the sample configuration above. 
+```
+gem install fluent-plugin-filter_typecast
+```
 
 ## Sample inputs and expected records
 

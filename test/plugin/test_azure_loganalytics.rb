@@ -31,7 +31,7 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
 
   def test_format
     d = create_driver
-    time = event_time("2011-01-02 13:14:15 UTC")
+    time = event_time("2017-11-24 01:14:15 UTC")
     d.run(default_tag: 'test') do
       d.feed(time, {"a"=>1})
       d.feed(time, {"a"=>2})
@@ -55,9 +55,9 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
       d.feed(
         time,
         {
-          :Log_ID => "5cdad72f-c848-4df0-8aaa-ffe033e75d57",
-          :date => "2016-12-10 09:44:32 JST",
-          :processing_time => "372",
+          :Log_ID => "5cdad72a-c848-4df0-8aaa-ffe033e75d57",
+          :date => "2017-11-24 01:44:32 JST",
+          :processing_time => 372,
           :remote => "101.202.74.59",
           :user => "-",
           :method => "GET / HTTP/1.1",
@@ -65,15 +65,15 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
           :size => "-",
           :referer => "-",
           :agent => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:27.0) Gecko/20100101 Firefox/27.0",
-          :eventtime => "2016-12-10T09:44:32Z"
+          :eventtime => "2017-11-24T01:44:32Z"
         })
 
       d.feed(
         time,
         {
-          :Log_ID => "7260iswx-8034-4cc3-uirtx-f068dd4cd659",
-          :date => "2016-12-10 09:45:14 JST",
-          :processing_time => "105",
+          :Log_ID => "7260iswa-8034-4cc3-uirtx-f068dd4cd659",
+          :date => "2017-11-24 01:45:14 JST",
+          :processing_time => 105,
           :remote => "201.78.74.59",
           :user => "-",
           :method => "GET /manager/html HTTP/1.1",
@@ -81,7 +81,7 @@ class AzureLogAnalyticsOutputTest < Test::Unit::TestCase
           :size => "-",
           :referer => "-",
           :agent => "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0",
-          :eventtime => "2016-12-10T09:45:14Z"
+          :eventtime => "2017-11-24T01:45:14Z"
         })
     end
     data = d.events
