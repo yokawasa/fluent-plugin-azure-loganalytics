@@ -111,7 +111,7 @@ fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default
     tag_field_name mytag
 </match>
 ```
-### (3) Configuration with Typecast file
+### (3) Configuration with Typecast filter
 
 You want to add typecast filter when you want to cast fields type. The filed type of code and size are cast by typecast filter.
 <u>fluent.conf</u>
