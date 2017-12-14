@@ -69,7 +69,7 @@ Once you have the workspace, get Workspace ID and Shared Key (either Primary Key
 fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default if **add_time_field** and **add_tag_field** are true respectively. Below are two types of the plugin configurations - Default and All options configuration.
 
 ### (1) Default Configuration (No options)
-<u>fluent.conf</u>
+<u>fluent_1.conf</u>
 ```
 <source>
     @type tail                         # input plugin
@@ -88,7 +88,7 @@ fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default
 ```
 
 ### (2) Configuration with All Options
-<u>fluent.conf</u>
+<u>fluent_2.conf</u>
 ```
 <source>
     @type tail                         # input plugin
@@ -114,7 +114,7 @@ fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default
 ### (3) Configuration with Typecast filter
 
 You want to add typecast filter when you want to cast fields type. The filed type of code and size are cast by typecast filter.
-<u>fluent.conf</u>
+<u>fluent_typecast.conf</u>
 ```
 <source>
     @type tail                         # input plugin
@@ -146,6 +146,50 @@ You want to add typecast filter when you want to cast fields type. The filed typ
 ```
 gem install fluent-plugin-filter_typecast
 ```
+### (4) Configuration with CSV format as input and specific field type as output
+You want to send to Log Analytics, logs generated with known delimiter (like comma, semi-colon) then you can use the csv format of fluentd and the keys/types properties.
+This can be used with any log, here implemented with Nginx custom log.
+<u>fluent_csv.conf</u>
+
+Suppose your log is formated the way below in the  /etc/nginx/conf.d/log.conf:
+```
+log_format appcustomlog '"$time_iso8601";"$hostname";$bytes_sent;$request_time;$upstream_response_length;$upstream_response_time;$content_length;"$remote_addr";$status;"$host";"$request";"$http_user_agent"';
+```
+And this log is activated throught the /etc/nginx/conf.d/virtualhost.conf :
+```
+server {
+	...
+	access_log /var/log/nginx/access.log appcustomlog;
+	...
+}
+```
+You can use the following configuration for the source to tail the log file and format it with proper field type.
+```
+<source>
+  @type tail
+  path /var/log/nginx/access.log
+  pos_file /var/log/td-agent/access.log.pos
+  tag nginx.accesslog
+  format csv
+  delimiter ;
+  keys time,hostname,bytes_sent,request_time,content_length,remote_addr,status,host,request,http_user_agent
+  types time:time,hostname:string,bytes_sent:float,request_time:float,content_length:string,remote_addr:string,status:integer,host:string,request:string,http_user_agent:string
+  time_key time
+  time_format %FT%T%z
+</source>
+
+<match nginx.accesslog>
+    @type azure-loganalytics
+    customer_id 818f7bbc-8034-4cc3-b97d-f068dd4cd658
+    shared_key ppC5500KzCcDsOKwM1yWUvZydCuC3m+ds/2xci0byeQr1G3E0Jkygn1N0Rxx/yVBUrDE2ok3vf4ksCzvBmQXHw==(dummy)
+    log_type NginxAcessLog
+    time_generated_field time
+    time_format %FT%T%z
+    add_tag_field true
+    tag_field_name mytag
+</match>
+```
+
 
 ## Sample inputs and expected records
 
@@ -162,6 +206,16 @@ The output record for sample input can be seen at Log Analytics portal like this
 
 ![fluent-plugin-azure-loganalytics output image](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/raw/master/img/Azure-LogAnalytics-Output-Image.png)
 
+<u>Sample Input (nginx custom access log)</u>
+```
+"2017-12-13T11:31:59+00:00";"nginx0001";21381;0.238;20882;0.178;-;"193.192.35.178";200;"mynginx.domain.com";"GET /mysite/picture.jpeg HTTP/1.1";"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/63.0.3239.84 Safari/537.36"
+```
+
+<u>Output Record</u>
+
+Part of the output record for sample input can be seen at Log Analytics portal like this with field of type _s (string) or _d (double):
+
+![fluent-plugin-azure-loganalytics output image](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/raw/master/img/Azure-LogAnalytics-Output-Image-2.png)
 
 ## Tests
 ### Running test code (using System rake)
