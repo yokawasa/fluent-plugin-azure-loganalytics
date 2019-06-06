@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "fluentd", [">= 0.14.15", "< 2"]
   gem.add_dependency "rest-client"
-  gem.add_dependency "azure-loganalytics-datacollector-api", [">= 0.1.2"]
+  gem.add_dependency "azure-loganalytics-datacollector-api", [">= 0.1.5"]
   gem.add_development_dependency "bundler", "~> 1.11"
   gem.add_development_dependency "rake", "~> 10.0"
   gem.add_development_dependency "test-unit"

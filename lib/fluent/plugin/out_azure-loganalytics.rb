@@ -16,6 +16,8 @@ module Fluent::Plugin
                  :desc => "Your Operations Management Suite workspace ID"
     config_param :shared_key, :string, :secret => true,
                  :desc => "The primary or the secondary Connected Sources client authentication key"
+    config_param :endpoint, :string, :default =>'ods.opinsights.azure.com',
+                 :desc => "The service endpoint"
     config_param :log_type, :string,
                  :desc => "The name of the event type that is being submitted to Log Analytics. log_type only alpha characters"
     config_param :time_generated_field, :string, :default => '',
@@ -59,7 +61,7 @@ module Fluent::Plugin
     def start
       super
       # start
-      @client=Azure::Loganalytics::Datacollectorapi::Client::new(@customer_id,@shared_key)
+      @client=Azure::Loganalytics::Datacollectorapi::Client::new(@customer_id,@shared_key,@endpoint)
     end
 
     def shutdown
