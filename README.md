@@ -43,6 +43,7 @@ Once you have the workspace, get Workspace ID and Shared Key (either Primary Key
     customer_id CUSTOMER_ID   # Customer ID aka WorkspaceID String
     shared_key KEY_STRING     # The primary or the secondary Connected Sources client authentication key
     log_type EVENT_TYPE_NAME  # The name of the event type. ex) ApacheAccessLog
+    endpoint myendpoint
     add_time_field true
     time_field_name mytime
     time_format %s
@@ -55,6 +56,7 @@ Once you have the workspace, get Workspace ID and Shared Key (either Primary Key
  * **customer\_id (required)** - Your Operations Management Suite workspace ID
  * **shared\_key (required)** - The primary or the secondary Connected Sources client authentication key
  * **log\_type (required)** - The name of the event type that is being submitted to Log Analytics. log_type only supports alpha characters
+ * **endpoint (optional)** - Default:'ods.opinsights.azure.com'. The service endpoint. You may want to use this param in case of sovereign cloud that has a different endpoint from the public cloud
  * **time\_generated\_field (optional)** - Default:''(empty string) The name of the time generated field. Be carefule that the value of field should strictly follow the ISO 8601 format (YYYY-MM-DDThh:mm:ssZ). See also [this](https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-collector-api#create-a-request) for more details
  * **add\_time\_field (optional)** - Default:true. This option allows to insert a time field to record
  * **time\_field\_name (optional)** - Default:time. This is required only when add_time_field is true

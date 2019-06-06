@@ -1,3 +1,7 @@
+## 0.4.0
+* Add endpoint parameter for sovereign cloud - [PR#8](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/8)
+* Changed dependency for azure-loganalytics-datacollector-api to `>= 0.1.5` - [PR#8](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/8)
+
 ## 0.3.1
 
 * Add requirements section - [PR#2](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/2)
