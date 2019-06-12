@@ -1,4 +1,4 @@
-# How to install td-agent and luent-plugin-azure-loganalytics plugin on RHEL
+# How to install td-agent and fluent-plugin-azure-loganalytics plugin on RHEL
 
 This is a quick installation procedure of td-agent and the custom plugin (fluent-plugin-azure-loganalytics) on Red Hat Enterprise Linux (7.4) 
 
