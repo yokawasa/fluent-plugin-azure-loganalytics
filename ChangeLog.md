@@ -1,4 +1,9 @@
+## 0.4.1
+
+* Use `yajl` instead of default JSON encoder to fix logging exceptions - [PR#10](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/10)
+
 ## 0.4.0
+
 * Add endpoint parameter for sovereign cloud - [PR#8](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/8)
 * Changed dependency for azure-loganalytics-datacollector-api to `>= 0.1.5` - [PR#8](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/8)
 
