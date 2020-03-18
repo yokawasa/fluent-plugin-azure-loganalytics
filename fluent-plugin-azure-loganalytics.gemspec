@@ -11,7 +11,6 @@ Gem::Specification.new do |gem|
   gem.description   = gem.summary
   gem.homepage      = "http://github.com/yokawasa/fluent-plugin-azure-loganalytics"
   gem.license       = "Apache-2.0"
-  gem.has_rdoc       = false
 
   gem.files         = `git ls-files`.split("\n")
   gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -22,7 +21,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "rest-client"
   gem.add_dependency "yajl-ruby"
   gem.add_dependency "azure-loganalytics-datacollector-api", [">= 0.1.5"]
-  gem.add_development_dependency "bundler", "~> 1.11"
-  gem.add_development_dependency "rake", "~> 10.0"
+  gem.add_development_dependency "rake", ">= 12.3.3"
   gem.add_development_dependency "test-unit"
 end

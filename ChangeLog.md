@@ -1,3 +1,6 @@
+## 0.4.2
+* fix CVE-2020-8130 - [issue #13](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/13)
+
 ## 0.4.1
 
 * Use `yajl` instead of default JSON encoder to fix logging exceptions - [PR#10](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/pull/10)
