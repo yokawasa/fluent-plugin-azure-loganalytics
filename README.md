@@ -58,6 +58,8 @@ Once you have the workspace, get Workspace ID and Shared Key (either Primary Key
  * **log\_type (required)** - The name of the event type that is being submitted to Log Analytics. log_type only supports alpha characters
  * **endpoint (optional)** - Default:'ods.opinsights.azure.com'. The service endpoint. You may want to use this param in case of sovereign cloud that has a different endpoint from the public cloud
  * **time\_generated\_field (optional)** - Default:''(empty string) The name of the time generated field. Be carefule that the value of field should strictly follow the ISO 8601 format (YYYY-MM-DDThh:mm:ssZ). See also [this](https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-collector-api#create-a-request) for more details
+ * **azure\_resource\_id (optional)** - Default:''(empty string) The resource ID of the Azure resource the data should be associated with. This populates the [_ResourceId](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/log-standard-properties#_resourceid) property and allows the data to be included in [resource-context](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/design-logs-deployment#access-mode) queries in Azure Log Analytics (Azure Monitor). If this field isn't specified, the data will not be included in resource-context queries. The format should be like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. Please see [this](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource#resourceid) for more detail on the resource ID format.
+
  * **add\_time\_field (optional)** - Default:true. This option allows to insert a time field to record
  * **time\_field\_name (optional)** - Default:time. This is required only when add_time_field is true
  * **localtime (optional)** - Default:false. Time record is inserted with UTC (Coordinated Universal Time) by default. This option allows to use local time if you set localtime true. This is valid only when add_time_field is true
@@ -105,6 +107,7 @@ fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default
     customer_id 818f7bbc-8034-4cc3-b97d-f068dd4cd658
     shared_key ppC5500KzCcDsOKwM1yWUvZydCuC3m+ds/2xci0byeQr1G3E0Jkygn1N0Rxx/yVBUrDE2ok3vf4ksCzvBmQXHw==(dummy)
     log_type ApacheAccessLog
+    azure_resource_id /subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/otherResourceGroup/providers/Microsoft.Storage/storageAccounts/examplestorage
     add_time_field true
     time_field_name mytime
     time_format %s

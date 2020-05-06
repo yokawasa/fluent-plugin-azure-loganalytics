@@ -22,6 +22,8 @@ module Fluent::Plugin
                  :desc => "The name of the event type that is being submitted to Log Analytics. log_type only alpha characters"
     config_param :time_generated_field, :string, :default => '',
                  :desc => "The name of the time generated field. Be carefule that the value of field should strictly follow the ISO 8601 format (YYYY-MM-DDThh:mm:ssZ)"
+    config_param :azure_resource_id, :string, :default => '',
+                 :desc => "Resource ID of the Azure resource the data should be associated with. This populates the _ResourceId property and allows the data to be included in resource-context queries in Azure Log Analytics (Azure Monitor). If this field isn't specified, the data will not be included in resource-context queries. The format should be like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
     config_param :add_time_field, :bool, :default => true,
                  :desc => "This option allows to insert a time field to record"
     config_param :time_field_name, :string, :default => "time",
@@ -93,7 +95,7 @@ module Fluent::Plugin
         records.push(record)
       }
       begin
-        res = @client.post_data(@log_type, records, @time_generated_field)
+        res = @client.post_data(@log_type, records, @time_generated_field, @azure_resource_id)
         if not Azure::Loganalytics::Datacollectorapi::Client.is_success(res)
           log.fatal "DataCollector API request failure: error code: " +
                   "#{res.code}, data=>" + Yajl.dump(records)

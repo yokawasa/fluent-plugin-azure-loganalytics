@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Support setting the [x-ms-AzureResourceId](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-collector-api#request-headers) Header - [issue #17](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/17)
+
 ## 0.4.2
 * fix CVE-2020-8130 - [issue #13](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/13)
 
