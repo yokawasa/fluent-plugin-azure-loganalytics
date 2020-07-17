@@ -1,3 +1,6 @@
+## 0.6.0
+* Change base [azure-loganalytics-datacollector-api](https://github.com/yokawasa/azure-log-analytics-data-collector) to ">= 0.4.0"
+
 ## 0.5.0
 
 * Support setting the [x-ms-AzureResourceId](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-collector-api#request-headers) Header - [issue #17](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/17)
