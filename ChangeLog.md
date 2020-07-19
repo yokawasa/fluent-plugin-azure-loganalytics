@@ -1,11 +1,22 @@
+# ChangeLog
+
+## 0.7.0
+
+* Change base [azure-loganalytics-datacollector-api](https://github.com/yokawasa/azure-log-analytics-data-collector) to ">= 0.5.0"
+    * [azure-log-analytics-data-collector-0.5.0](https://github.com/yokawasa/azure-log-analytics-data-collector/releases/tag/v0.5.0) added check body size not to exceed data limit of 30MB in Azure Monitor Data Collection API
+    * relevant issues: [issue #16](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/16)
+
 ## 0.6.0
+
 * Change base [azure-loganalytics-datacollector-api](https://github.com/yokawasa/azure-log-analytics-data-collector) to ">= 0.4.0"
+    * In [azure-log-analytics-data-collector-0.4.0](https://github.com/yokawasa/azure-log-analytics-data-collector/releases/tag/v0.4.0), restclient retries request on the status code 429(Too Many Requests), 500 (Internal Server Error), 503(Service Unavailable)
 
 ## 0.5.0
 
 * Support setting the [x-ms-AzureResourceId](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-collector-api#request-headers) Header - [issue #17](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/17)
 
 ## 0.4.2
+
 * fix CVE-2020-8130 - [issue #13](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/issues/13)
 
 ## 0.4.1
