@@ -259,6 +259,15 @@ $ fluentd -c fluent.conf -vv &
 $ ab -n 5 -c 2 http://localhost/test/foo.html
 ```
 
+## Data Limits
+As described in [ Azure Monitor Data Collection API doc](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-collector-api#data-limits), there are some constraints around the data posted to the Azure Monitor Data collection API. Here are relevant constraints:
+
+- Max payload size: `30 BM`
+- Max field value size: `32 KB`
+- Max characters num for each field name: `500`
+
+Please be noticed that the plugin checks the max payload size before it post to the API (>=[0.7.0](https://github.com/yokawasa/fluent-plugin-azure-loganalytics/releases/tag/v0.7.0)), however it doesn't check max field value size and max charactores num for each field name.
+
 ## Change log
 * [Changelog](ChangeLog.md)
 
