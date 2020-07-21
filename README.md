@@ -63,7 +63,7 @@ Once you have the workspace, get Workspace ID and Shared Key (either Primary Key
  * **add\_time\_field (optional)** - Default:true. This option allows to insert a time field to record
  * **time\_field\_name (optional)** - Default:time. This is required only when add_time_field is true
  * **localtime (optional)** - Default:false. Time record is inserted with UTC (Coordinated Universal Time) by default. This option allows to use local time if you set localtime true. This is valid only when add_time_field is true
- * **time\_format (optional)** -  Default:%s. Time format for a time field to be inserted. Default format is %s, that is unix epoch time. If you want it to be more human readable, set this %Y%m%d-%H:%M:%S, for example. This is valid only when add_time_field is true.
+ * **time\_format (optional)** -  Default:%s. Time format for a time field to be inserted. Default format is %s, that is unix epoch time. If you want it to be more human readable, set this %FT%T%z, for example. This is valid only when add_time_field is true.
  * **add\_tag\_field (optional)** - Default:false. This option allows to insert a tag field to record
  * **tag\_field\_name (optional)** - Default:tag. This is required only when add_time_field is true
 
@@ -110,7 +110,7 @@ fluent-plugin-azure-loganalytics adds **time** and **tag** attributes by default
     azure_resource_id /subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/otherResourceGroup/providers/Microsoft.Storage/storageAccounts/examplestorage
     add_time_field true
     time_field_name mytime
-    time_format %s
+    time_format %FT%T%z
     localtime true
     add_tag_field true
     tag_field_name mytag
