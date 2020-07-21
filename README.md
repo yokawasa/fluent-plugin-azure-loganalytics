@@ -141,7 +141,7 @@ You want to add typecast filter when you want to cast fields type. The filed typ
     log_type ApacheAccessLog
     add_time_field true
     time_field_name mytime
-    time_format %s
+    time_format %FT%T%z
     localtime true
     add_tag_field true
     tag_field_name mytag
